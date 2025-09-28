@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "1d79868e-2658-4ed9-8a4c-97d87d5e463c",
+		"name": "Devices API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24991474"
+	},
+	"item": [
+		{
+			"name": "Light",
+			"item": [
+				{
+					"name": "save light",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/lights/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"lights",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list light",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/lights",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"lights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete light",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/lights/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"lights",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle light",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/lights/1/toggle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"lights",
+								"1",
+								"toggle"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fan",
+			"item": [
+				{
+					"name": "save fan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/fans/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"fans",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list fan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/fans",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"fans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete fan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/fans/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"fans",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle fan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/fans/1/toggle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"fans",
+								"1",
+								"toggle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update speed",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/fans/1?speed=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"fans",
+								"1"
+							],
+							"query": [
+								{
+									"key": "speed",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Air Conditioner",
+			"item": [
+				{
+					"name": "save air conditioner",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list air conditioner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete air conditioner",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle air conditioner",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/1/toggle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"1",
+								"toggle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update thermostat",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/1/thermostat?value=25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"1",
+								"thermostat"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update thermostat off mode",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/1/thermoOffMode?value=25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"1",
+								"thermoOffMode"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update thermo and thermOffMode",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thermostat\":1,\r\n    \"thermostatOffMode\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/device/airconditioners/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"device",
+								"airconditioners",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
