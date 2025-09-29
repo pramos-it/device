@@ -28,7 +28,7 @@ public class LightController {
 		return ResponseEntity.ok(lightService.listAll());
 	}
 	
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<Light> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(lightService.create());
 	}	

@@ -32,7 +32,7 @@ public class AirConditionerController {
 		return ResponseEntity.ok(airConditionerService.listAll());
 	}
 
-	@PostMapping("/save")
+	@PostMapping
 	public ResponseEntity<AirConditioner> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(airConditionerService.create());
 	}

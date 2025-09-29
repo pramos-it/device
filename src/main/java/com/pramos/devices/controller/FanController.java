@@ -29,7 +29,7 @@ public class FanController {
 		return ResponseEntity.ok(fanService.listAll());
 	}
 
-	@PostMapping("/save")
+	@PostMapping
 	public ResponseEntity<Fan> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(fanService.create());
 	}
