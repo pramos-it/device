@@ -1,5 +1,6 @@
 package com.pramos.devices.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,8 +12,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="light")
-public class Light implements Device {	
+public class Light implements Device, Serializable {	
 	
+	private static final long serialVersionUID = 435706412048182295L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

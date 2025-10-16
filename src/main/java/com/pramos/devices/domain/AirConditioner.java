@@ -1,5 +1,6 @@
 package com.pramos.devices.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,7 +12,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="air-conditioner")
-public class AirConditioner implements Device {
+public class AirConditioner implements Device, Serializable {
+
+	private static final long serialVersionUID = 6543851455827373653L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
