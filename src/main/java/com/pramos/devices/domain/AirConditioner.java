@@ -11,13 +11,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="air-conditioner")
-public class AirConditioner extends Device {
-
-	private static final long serialVersionUID = -76874001430341532L;
+public class AirConditioner implements Device {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="isOn")
+	private boolean isOn;
 	
 	@Column(name = "thermostat", nullable = false)
 	private Double thermostat;	
@@ -56,13 +57,25 @@ public class AirConditioner extends Device {
 	}
 
 	@Override
-	public void deviceTurnOff() {
-		System.out.println("Air Condition off");
+	public boolean isOn() {
+		return isOn;
+	}
+
+	@Override
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
 	}
 	
 	@Override
-	public void deviceTurnOn() {
-		System.out.println("Air Condition on");
+	public boolean turnOff() {
+		setOn(false);
+        return false; 
+	}
+
+	@Override
+	public boolean turnOn() {
+		setOn(true);
+        return true;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.pramos.devices.domain;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +11,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="light")
-public class Light extends Device {	
-
-	private static final long serialVersionUID = 1644526258133163339L;
+public class Light implements Device {	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="isOn")
+	private boolean isOn;
 	
 	public Light() {
 		super();
@@ -31,18 +33,30 @@ public class Light extends Device {
 	}
 
 	@Override
-	public void deviceTurnOff() {
-		System.out.println("Light off");		
+	public boolean isOn() {
+		return isOn;
 	}
 
 	@Override
-	public void deviceTurnOn() {
-		System.out.println("Light on");
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
+	}
+	
+	@Override
+	public boolean turnOff() {
+		setOn(false);
+        return false; 
+	}
+
+	@Override
+	public boolean turnOn() {
+		setOn(true);
+        return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(id, isOn);
 	}
 
 	@Override
@@ -54,6 +68,8 @@ public class Light extends Device {
 		if (getClass() != obj.getClass())
 			return false;
 		Light other = (Light) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(id, other.id) && isOn == other.isOn;
 	}
+
+	
 }

@@ -11,13 +11,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="fan")
-public class Fan extends Device {	
+public class Fan implements Device {	
 
-	private static final long serialVersionUID = 5611833297319106851L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="isOn")
+	private boolean isOn;
 	
 	@Column(name = "speed", length = 1, nullable = false)
 	private int speed;
@@ -44,13 +46,25 @@ public class Fan extends Device {
 	}
 
 	@Override
-	public void deviceTurnOff() {
-		System.out.println("Fan off.");
+	public boolean isOn() {
+		return isOn;
 	}
 
 	@Override
-	public void deviceTurnOn() {
-		System.out.println("Fan on");
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
+	}
+	
+	@Override
+	public boolean turnOff() {
+		setOn(false);
+        return false; 
+	}
+
+	@Override
+	public boolean turnOn() {
+		setOn(true);
+        return true;
 	}
 
 	@Override

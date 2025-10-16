@@ -12,7 +12,8 @@ public class UpdateSystemService {
 	@Autowired
 	private DeviceService deviceService;
 
-	@Scheduled(cron = "0 0 1 1 1 *", zone = "America/Halifax")
+//	@Scheduled(cron = "0 0 1 1 1 *", zone = "America/Halifax")
+	@Scheduled(cron = "0 */2 * * * *", zone = "America/Halifax")
 	public void updateSystem() {
 		deviceService.updateSystem();
     	System.out.println("System updated.");
