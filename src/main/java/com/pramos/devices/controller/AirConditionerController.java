@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,17 +42,17 @@ public class AirConditionerController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping("/{id}/toggle")
+	@PatchMapping("/{id}/toggle")
 	public ResponseEntity<AirConditioner> toggle(@PathVariable Long id) {
 		return ResponseEntity.ok(airConditionerService.toggle(id));	
 	}
 	
-	@PutMapping("/{id}/thermostat")
+	@PatchMapping("/{id}/thermostat")
 	public ResponseEntity<AirConditioner> updateThermostat(@PathVariable Long id, @RequestParam(name = "value") Double t) {
 		return ResponseEntity.ok(airConditionerService.updateThermostat(id, t));		
 	}
 
-	@PutMapping("/{id}/thermoOffMode")
+	@PatchMapping("/{id}/thermoOffMode")
 	public ResponseEntity<AirConditioner> updateThermostatOffMode(@PathVariable Long id, @RequestParam(name = "value") Double tom) {
 		return ResponseEntity.ok(airConditionerService.updateThermostatOffMode(id, tom));
 	}
