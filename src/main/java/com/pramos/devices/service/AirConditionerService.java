@@ -50,11 +50,9 @@ public class AirConditionerService {
 		AirConditioner airCond = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
 		airCond.setThermostat(thermostat);
 		
-		if(thermostat <= airCond.getThermostatOffMode() && airCond.isOn()) {
+		if(thermostat < airCond.getThermostatOffMode() && airCond.isOn()) {
 			airCond.turnOff();
-		} else if (thermostat > airCond.getThermostatOffMode() && !airCond.isOn()){
-			airCond.turnOn();
-		}
+		} 
 		
 		return airConditionerRepository.save(airCond);
 	}
@@ -68,11 +66,9 @@ public class AirConditionerService {
 		AirConditioner airCond = airConditionerRepository.findById(id).get();
 		airCond.setThermostatOffMode(thermostatOffMode);
 		
-		if(airCond.getThermostat() <= thermostatOffMode && airCond.isOn()) {
+		if(airCond.getThermostat() < thermostatOffMode && airCond.isOn()) {
 			airCond.turnOff();
-		} else {
-			airCond.turnOn();
-		}
+		} 
 		
 		return airConditionerRepository.save(airCond);		
 	}
