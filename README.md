@@ -29,18 +29,18 @@ PUT	/lights/{id}/toggle	Toggle ON/OFF
 DELETE	/lights/{id}	Delete
 
 Fans
-Method	Path	Description
-GET	/fans	List
-POST	/fans	Create
-PUT	/fans/{id}/toggle	Toggle ON/OFF
-PUT	/fans/{id}/speed?value={s}	Update speed (turns OFF when s = 0)
-DELETE	/fans/{id}	Delete
+Method	  Path	Description
+GET	      /fans	                      List
+POST	    /fans	                      Create
+PATCH	    /fans/{id}/toggle	          Toggle ON/OFF
+PATCH    	/fans/{id}/speed?value={s}	Update speed (turns OFF when s = 0)
+DELETE	  /fans/{id}	                Delete
 
 Air Conditioners
 Method	Path	Description
 GET	/air-conditioners	List
 POST	/air-conditioners	Create
-PUT	/air-conditioners/{id}/toggle	Toggle ON/OFF
-PUT	/air-conditioners/{id}/thermostat?value={t}	Update thermostat (turns OFF when thermostat == thermoOffMode)
-PUT	/air-conditioners/{id}/thermoOffMode?value={t}	Update thermoOffMode
+PATCH	/air-conditioners/{id}/toggle	Toggle ON/OFF
+PATCH	/air-conditioners/{id}/thermostat?value={t}	Update thermostat (turns OFF when thermostat == thermoOffMode)
+PATCH	/air-conditioners/{id}/thermoOffMode?value={t}	Update thermoOffMode
 DELETE	/air-conditioners/{id}	Delete
