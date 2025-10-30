@@ -29,12 +29,13 @@ PUT	/lights/{id}/toggle	Toggle ON/OFF
 DELETE	/lights/{id}	Delete
 
 Fans
-Method	  Path	Description
+Method	  Path	                      Description
 GET	      /fans	                      List
 POST	    /fans	                      Create
 PATCH	    /fans/{id}/toggle	          Toggle ON/OFF
 PATCH    	/fans/{id}/speed?value={s}	Update speed (turns OFF when s = 0)
 DELETE	  /fans/{id}	                Delete
+
 
 Air Conditioners
 Method	Path	Description
