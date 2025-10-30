@@ -32,6 +32,7 @@ Lights
 
 
 Fans
+
 | Method | Path                       | Description                         |
 | ------ | -------------------------- | ----------------------------------- |
 | GET    | /fans                      | List                                |
