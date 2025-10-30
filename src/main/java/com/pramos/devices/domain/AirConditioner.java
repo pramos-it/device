@@ -32,7 +32,7 @@ public class AirConditioner implements Device, Serializable {
 	public AirConditioner() {
 		super();
 		this.thermostat = 24.5;
-		this.thermostatOffMode = 0.0;
+		this.thermostatOffMode = 22.0;
 	}
 
 	public Long getId() {

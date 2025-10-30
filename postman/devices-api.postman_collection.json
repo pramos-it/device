@@ -184,7 +184,7 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8081/device/fans/1/toggle",
@@ -209,10 +209,10 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/device/fans/1?speed=2",
+							"raw": "http://localhost:8081/device/fans/1?speed=0",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -226,7 +226,7 @@
 							"query": [
 								{
 									"key": "speed",
-									"value": "2"
+									"value": "0"
 								}
 							]
 						}
@@ -312,10 +312,10 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/device/airconditioners/2/toggle",
+							"raw": "http://localhost:8081/device/airconditioners/1/toggle",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -324,7 +324,7 @@
 							"path": [
 								"device",
 								"airconditioners",
-								"2",
+								"1",
 								"toggle"
 							]
 						}
@@ -337,7 +337,7 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8081/device/airconditioners/1/thermostat?value=25",
@@ -368,7 +368,7 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8081/device/airconditioners/1/thermoOffMode?value=25",
