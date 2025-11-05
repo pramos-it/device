@@ -1,12 +1,15 @@
 package com.pramos.devices.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pramos.devices.domain.Light;
+import com.pramos.devices.dto.LightDto;
 import com.pramos.devices.exceptions.LightException;
 import com.pramos.devices.repository.LightRepository;
 
@@ -16,14 +19,24 @@ public class LightService {
 	@Autowired
 	private LightRepository lightRepository;
     
-    public List<Light> listAll(){
-		return lightRepository.findAll();
+    public List<LightDto> listAll(){
+    	List<LightDto> listAllDto = new ArrayList<>();
+    	
+    	List<Light> listAll = lightRepository.findAll();
+    	if(listAll.isEmpty()) {
+    		return listAllDto;
+    	} 
+    	
+    	listAllDto = listAll.stream().map(light -> new LightDto(light.getId(), light.isOn())).collect(Collectors.toList());
+    	return listAllDto;
 	}
 	
     @Transactional
-	public Light create() {
+	public LightDto create() {
 		Light light = new Light();
-		return lightRepository.save(light);
+		light = lightRepository.save(light);
+		LightDto lightDto = new LightDto(light.getId(), light.isOn());
+		return lightDto;
 	}	
 	
 	@Transactional
@@ -33,10 +46,13 @@ public class LightService {
 	}
 	
 	@Transactional
-	public Light toggle(Long id) {
+	public LightDto toggle(Long id) {
 		Light light = lightRepository.findById(id).orElseThrow(() -> new LightException("Light not found: " + id));
 		light.toggler();
-		return lightRepository.save(light);		
+		light = lightRepository.save(light);
+		
+		LightDto lightDto = new LightDto(light.getId(), light.isOn());
+		return lightDto;
 	}
 	
 	@Transactional

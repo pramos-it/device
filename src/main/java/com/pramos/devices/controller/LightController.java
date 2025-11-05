@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pramos.devices.domain.Light;
+import com.pramos.devices.dto.LightDto;
 import com.pramos.devices.service.LightService;
 
 @RestController
@@ -24,12 +24,12 @@ public class LightController {
 	private LightService lightService;
 	
 	@GetMapping
-	public ResponseEntity<List<Light>> list(){
+	public ResponseEntity<List<LightDto>> list(){
 		return ResponseEntity.ok(lightService.listAll());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Light> create() {
+	public ResponseEntity<LightDto> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(lightService.create());
 	}	
 	
@@ -40,7 +40,7 @@ public class LightController {
 	}
 	
 	@PutMapping("/{id}/toggle")
-	public ResponseEntity<Light> toggle(@PathVariable Long id) {
+	public ResponseEntity<LightDto> toggle(@PathVariable Long id) {
 			return ResponseEntity.ok(lightService.toggle(id));
 	}
 }

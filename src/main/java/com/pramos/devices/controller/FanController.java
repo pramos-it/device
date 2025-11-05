@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pramos.devices.domain.Fan;
+import com.pramos.devices.dto.FanDto;
 import com.pramos.devices.service.FanService;
 
 @RestController
@@ -25,12 +25,12 @@ public class FanController {
 	private FanService fanService;
 
 	@GetMapping
-	public ResponseEntity<List<Fan>> list() {
+	public ResponseEntity<List<FanDto>> list() {
 		return ResponseEntity.ok(fanService.listAll());
 	}
 
 	@PostMapping
-	public ResponseEntity<Fan> create() {
+	public ResponseEntity<FanDto> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(fanService.create());
 	}
 
@@ -41,12 +41,12 @@ public class FanController {
 	}
 	
 	@PatchMapping("/{id}/toggle")
-	public ResponseEntity<Fan> toggle(@PathVariable Long id) {
+	public ResponseEntity<FanDto> toggle(@PathVariable Long id) {
 		return ResponseEntity.ok(fanService.toggle(id));	
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<Fan> updateSpeed(@PathVariable Long id, @RequestParam(name = "speed") Integer s) {
+	public ResponseEntity<FanDto> updateSpeed(@PathVariable Long id, @RequestParam(name = "speed") Integer s) {
 		return ResponseEntity.ok(fanService.updateSpeed(id, s));
 	}
 

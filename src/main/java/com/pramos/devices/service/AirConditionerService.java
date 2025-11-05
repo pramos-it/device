@@ -1,5 +1,6 @@
 package com.pramos.devices.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pramos.devices.domain.AirConditioner;
+import com.pramos.devices.dto.AirConditionerDto;
 import com.pramos.devices.exceptions.AirConditionerException;
 import com.pramos.devices.repository.AirConditionerRepository;
 
@@ -17,14 +19,25 @@ public class AirConditionerService {
 	@Autowired
 	private AirConditionerRepository airConditionerRepository;
 	
-	public List<AirConditioner> listAll(){
-		return airConditionerRepository.findAll();
+	public List<AirConditionerDto> listAll(){
+		List<AirConditionerDto> listAllAirConditionerDto =  new ArrayList<>();
+		
+		List<AirConditioner> listAll = airConditionerRepository.findAll();
+		if(listAll.isEmpty()) {
+			return listAllAirConditionerDto;
+		}
+		
+		listAllAirConditionerDto = listAll.stream().map(airCond -> new AirConditionerDto(airCond.getId(), airCond.isOn(), airCond.getThermostat(), airCond.getThermostatOffMode())).collect(Collectors.toList());
+		return listAllAirConditionerDto;
 	}
 	
 	@Transactional
-	public AirConditioner create() {
+	public AirConditionerDto create() {
 		AirConditioner airConditioner = new AirConditioner();
-		return airConditionerRepository.save(airConditioner);
+		airConditioner = airConditionerRepository.save(airConditioner);
+		
+		AirConditionerDto airConditionerDto = new AirConditionerDto(airConditioner.getId(), airConditioner.isOn(), airConditioner.getThermostat(), airConditioner.getThermostatOffMode());
+		return airConditionerDto;
 	}
 	
 	@Transactional
@@ -34,62 +47,73 @@ public class AirConditionerService {
 	}
 	
 	@Transactional
-	public AirConditioner toggle(Long id) {
+	public AirConditionerDto toggle(Long id) {
 		AirConditioner airConditioner = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
-		airConditioner.toggler();
+		airConditioner.toggler();		
+		airConditioner = airConditionerRepository.save(airConditioner);
 		
-		return airConditionerRepository.save(airConditioner);		
+		AirConditionerDto airConditionerDto = new AirConditionerDto(airConditioner.getId(), airConditioner.isOn(), airConditioner.getThermostat(), airConditioner.getThermostatOffMode());
+		return airConditionerDto;	
 	}
 	
 	@Transactional
-	public AirConditioner updateThermostat(Long id, Double thermostat) {
+	public AirConditionerDto updateThermostat(Long id, Double thermostat) {
 		if (thermostat == null) {
 			throw new AirConditionerException("Thermostat can be not null.");
 		}
 		
-		AirConditioner airCond = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
-		airCond.setThermostat(thermostat);
+		AirConditioner airConditioner = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
+		airConditioner.setThermostat(thermostat);
 		
-		if(thermostat < airCond.getThermostatOffMode() && airCond.isOn()) {
-			airCond.turnOff();
+		if(thermostat < airConditioner.getThermostatOffMode() && airConditioner.isOn()) {
+			airConditioner.turnOff();
 		} 
 		
-		return airConditionerRepository.save(airCond);
+		airConditioner = airConditionerRepository.save(airConditioner);
+		
+		AirConditionerDto airConditionerDto = new AirConditionerDto(airConditioner.getId(), airConditioner.isOn(), airConditioner.getThermostat(), airConditioner.getThermostatOffMode());
+		return airConditionerDto;
 	}
 	
 	@Transactional
-	public AirConditioner updateThermostatOffMode(Long id, Double thermostatOffMode) {
+	public AirConditionerDto updateThermostatOffMode(Long id, Double thermostatOffMode) {
 		if (thermostatOffMode == null) {
 			throw new AirConditionerException("Thermostat mode off can be not null.");
 		}
 		
-		AirConditioner airCond = airConditionerRepository.findById(id).get();
-		airCond.setThermostatOffMode(thermostatOffMode);
+		AirConditioner airConditioner = airConditionerRepository.findById(id).get();
+		airConditioner.setThermostatOffMode(thermostatOffMode);
 		
-		if(airCond.getThermostat() < thermostatOffMode && airCond.isOn()) {
-			airCond.turnOff();
+		if(airConditioner.getThermostat() < thermostatOffMode && airConditioner.isOn()) {
+			airConditioner.turnOff();
 		} 
 		
-		return airConditionerRepository.save(airCond);		
+		airConditioner = airConditionerRepository.save(airConditioner);
+		
+		AirConditionerDto airConditionerDto = new AirConditionerDto(airConditioner.getId(), airConditioner.isOn(), airConditioner.getThermostat(), airConditioner.getThermostatOffMode());
+		return airConditionerDto;	
 	}
 	
 	@Transactional
-	public AirConditioner updateThermostatAndThermostatOffMode(Long id, Double thermostat, Double thermostatOffMode) {
+	public AirConditionerDto updateThermostatAndThermostatOffMode(Long id, Double thermostat, Double thermostatOffMode) {
 		if (thermostat == null || thermostatOffMode == null) {
 			throw new AirConditionerException("Thermostat and thermostatOffMode are required.");
 		}
 		
-		AirConditioner airCond = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
-		airCond.setThermostat(thermostat);
-		airCond.setThermostatOffMode(thermostatOffMode);
+		AirConditioner airConditioner = airConditionerRepository.findById(id).orElseThrow(()-> new AirConditionerException("Air conditioner not found: " + id));
+		airConditioner.setThermostat(thermostat);
+		airConditioner.setThermostatOffMode(thermostatOffMode);
 		
-		if(thermostat <= thermostatOffMode && airCond.isOn()) {
-			airCond.turnOff();
-		} else if (thermostat > thermostatOffMode && !airCond.isOn()){
-			airCond.turnOn();
+		if(thermostat <= thermostatOffMode && airConditioner.isOn()) {
+			airConditioner.turnOff();
+		} else if (thermostat > thermostatOffMode && !airConditioner.isOn()){
+			airConditioner.turnOn();
 		}
 		
-		return airConditionerRepository.save(airCond);
+		airConditioner = airConditionerRepository.save(airConditioner);
+		
+		AirConditionerDto airConditionerDto = new AirConditionerDto(airConditioner.getId(), airConditioner.isOn(), airConditioner.getThermostat(), airConditioner.getThermostatOffMode());
+		return airConditionerDto;
 	}
 	
 	@Transactional

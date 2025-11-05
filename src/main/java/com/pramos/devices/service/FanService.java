@@ -1,5 +1,6 @@
 package com.pramos.devices.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pramos.devices.domain.Fan;
+import com.pramos.devices.dto.FanDto;
 import com.pramos.devices.exceptions.FanException;
 import com.pramos.devices.repository.FanRepository;
 
@@ -17,14 +19,24 @@ public class FanService {
 	@Autowired
 	private FanRepository fanRepository;
 	
-	public List<Fan> listAll(){
-		return fanRepository.findAll();
+	public List<FanDto> listAll(){		
+		List<FanDto> listAllFanDto =  new ArrayList<>();
+		
+		List<Fan> listAll = fanRepository.findAll();
+		if(listAll.isEmpty()) {
+			return listAllFanDto;
+		}
+		
+		listAllFanDto = listAll.stream().map(fan -> new FanDto(fan.getId(), fan.isOn(), fan.getSpeed())).collect(Collectors.toList());
+		return listAllFanDto;
 	}
 	
 	@Transactional
-	public Fan create() {
+	public FanDto create() {
 		Fan fan = new Fan();
-		return fanRepository.save(fan);
+		fan = fanRepository.save(fan);
+		FanDto fanDto = new FanDto(fan.getId(), fan.isOn(), fan.getSpeed());		
+		return fanDto;
 	}
 	
 	@Transactional
@@ -34,7 +46,7 @@ public class FanService {
 	}
 	
 	@Transactional
-	public Fan toggle(Long id) {
+	public FanDto toggle(Long id) {
 		Fan fan = fanRepository.findById(id).orElseThrow(() -> new FanException("Fan not found: " + id));
 		if(!fan.isOn()) {
 			fan.setSpeed(1);
@@ -43,11 +55,15 @@ public class FanService {
 		if (!fan.isOn()) {
 			fan.setSpeed(0);
 		}
-		return fanRepository.save(fan);		
+		
+		fan = fanRepository.save(fan);	
+		
+		FanDto fanDto = new FanDto(fan.getId(), fan.isOn(), fan.getSpeed());	
+		return fanDto;		
 	}
 	
 	@Transactional
-	public Fan updateSpeed(Long id, Integer speed) {
+	public FanDto updateSpeed(Long id, Integer speed) {
 	    if (speed == null) {
 	        throw new FanException("Speed can not be null");
 	    }
@@ -65,7 +81,10 @@ public class FanService {
 			fan.turnOn();
 		}
 	  	
-		return fanRepository.save(fan);
+		fan = fanRepository.save(fan);	
+		
+		FanDto fanDto = new FanDto(fan.getId(), fan.isOn(), fan.getSpeed());	
+		return fanDto;	
 	}
 	
 	@Transactional

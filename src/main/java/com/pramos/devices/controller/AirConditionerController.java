@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pramos.devices.domain.AirConditioner;
 import com.pramos.devices.dto.AirConditionerDto;
 import com.pramos.devices.service.AirConditionerService;
 
@@ -27,12 +26,12 @@ public class AirConditionerController {
 	private AirConditionerService airConditionerService;
 
 	@GetMapping
-	public ResponseEntity<List<AirConditioner>> list() {
+	public ResponseEntity<List<AirConditionerDto>> list() {
 		return ResponseEntity.ok(airConditionerService.listAll());
 	}
 
 	@PostMapping
-	public ResponseEntity<AirConditioner> create() {
+	public ResponseEntity<AirConditionerDto> create() {
 		return ResponseEntity.status(HttpStatus.CREATED).body(airConditionerService.create());
 	}
 
@@ -43,22 +42,22 @@ public class AirConditionerController {
 	}
 	
 	@PatchMapping("/{id}/toggle")
-	public ResponseEntity<AirConditioner> toggle(@PathVariable Long id) {
+	public ResponseEntity<AirConditionerDto> toggle(@PathVariable Long id) {
 		return ResponseEntity.ok(airConditionerService.toggle(id));	
 	}
 	
 	@PatchMapping("/{id}/thermostat")
-	public ResponseEntity<AirConditioner> updateThermostat(@PathVariable Long id, @RequestParam(name = "value") Double t) {
+	public ResponseEntity<AirConditionerDto> updateThermostat(@PathVariable Long id, @RequestParam(name = "value") Double t) {
 		return ResponseEntity.ok(airConditionerService.updateThermostat(id, t));		
 	}
 
 	@PatchMapping("/{id}/thermoOffMode")
-	public ResponseEntity<AirConditioner> updateThermostatOffMode(@PathVariable Long id, @RequestParam(name = "value") Double tom) {
+	public ResponseEntity<AirConditionerDto> updateThermostatOffMode(@PathVariable Long id, @RequestParam(name = "value") Double tom) {
 		return ResponseEntity.ok(airConditionerService.updateThermostatOffMode(id, tom));
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<AirConditioner> updateThermostatAndThermostatOffMode(@PathVariable Long id, @RequestBody AirConditionerDto airCondDto) {
+	public ResponseEntity<AirConditionerDto> updateThermostatAndThermostatOffMode(@PathVariable Long id, @RequestBody AirConditionerDto airCondDto) {
 		return ResponseEntity.ok(airConditionerService.updateThermostatAndThermostatOffMode(id, airCondDto.thermostat(), airCondDto.thermostatOffMode()));
 	}
 	
