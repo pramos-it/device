@@ -21,7 +21,7 @@ public class AirConditioner implements Device, Serializable {
 	private Long id;
 	
 	@Column(name="isOn")
-	private boolean isOn;
+	private Boolean isOn;
 	
 	@Column(name = "thermostat", nullable = false)
 	private Double thermostat;	
@@ -60,23 +60,23 @@ public class AirConditioner implements Device, Serializable {
 	}
 
 	@Override
-	public boolean isOn() {
+	public Boolean isOn() {
 		return isOn;
 	}
 
 	@Override
-	public void setOn(boolean isOn) {
+	public void setOn(Boolean isOn) {
 		this.isOn = isOn;
 	}
 	
 	@Override
-	public boolean turnOff() {
+	public Boolean turnOff() {
 		setOn(false);
         return false; 
 	}
 
 	@Override
-	public boolean turnOn() {
+	public Boolean turnOn() {
 		setOn(true);
         return true;
 	}

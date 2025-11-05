@@ -21,10 +21,10 @@ public class Fan implements Device, Serializable {
 	private Long id;
 	
 	@Column(name="isOn")
-	private boolean isOn;
+	private Boolean isOn;
 	
 	@Column(name = "speed", length = 1, nullable = false)
-	private int speed;
+	private Integer speed;
 	
 	public Fan() {
 		super();
@@ -39,7 +39,7 @@ public class Fan implements Device, Serializable {
 		this.id = id;
 	}
 
-	public int getSpeed() {
+	public Integer getSpeed() {
 		return speed;
 	}
 
@@ -48,23 +48,23 @@ public class Fan implements Device, Serializable {
 	}
 
 	@Override
-	public boolean isOn() {
+	public Boolean isOn() {
 		return isOn;
 	}
 
 	@Override
-	public void setOn(boolean isOn) {
+	public void setOn(Boolean isOn) {
 		this.isOn = isOn;
 	}
 	
 	@Override
-	public boolean turnOff() {
+	public Boolean turnOff() {
 		setOn(false);
         return false; 
 	}
 
 	@Override
-	public boolean turnOn() {
+	public Boolean turnOn() {
 		setOn(true);
         return true;
 	}

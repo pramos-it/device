@@ -2,13 +2,13 @@ package com.pramos.devices.domain;
 
 interface Device {
 	
-	boolean isOn();
-    void setOn(boolean state); 
+	Boolean isOn();
+    void setOn(Boolean state); 
 
-    boolean turnOff(); 
-    boolean turnOn();
+    Boolean turnOff(); 
+    Boolean turnOn();
   
-    default boolean toggler() {
+    default Boolean toggler() {
         if (isOn()) {
             return turnOff();
         } else {
