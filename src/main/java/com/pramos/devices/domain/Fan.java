@@ -27,7 +27,7 @@ public class Fan implements Device, Serializable {
 	private Integer speed;
 	
 	public Fan() {
-		super();
+		this.isOn = false;
 		this.speed = 0;
 	}
 	
@@ -53,19 +53,21 @@ public class Fan implements Device, Serializable {
 	}
 
 	@Override
-	public void setOn(Boolean isOn) {
+	public void setOn(Boolean isOn) {		
 		this.isOn = isOn;
 	}
 	
 	@Override
 	public Boolean turnOff() {
 		setOn(false);
+		setSpeed(0);
         return false; 
 	}
 
 	@Override
 	public Boolean turnOn() {
 		setOn(true);
+		setSpeed(1);
         return true;
 	}
 

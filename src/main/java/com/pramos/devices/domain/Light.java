@@ -24,7 +24,7 @@ public class Light implements Device, Serializable {
 	private Boolean isOn;
 	
 	public Light() {
-		super();
+		this.isOn = false;
 	}
 	
 	public Long getId() {

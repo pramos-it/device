@@ -20,8 +20,7 @@ public class LightService {
 	private LightRepository lightRepository;
     
     public List<LightDto> listAll(){
-    	List<LightDto> listAllDto = new ArrayList<>();
-    	
+    	List<LightDto> listAllDto = new ArrayList<>();    	
     	List<Light> listAll = lightRepository.findAll();
     	if(listAll.isEmpty()) {
     		return listAllDto;

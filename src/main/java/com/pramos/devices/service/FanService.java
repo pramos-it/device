@@ -47,17 +47,9 @@ public class FanService {
 	
 	@Transactional
 	public FanDto toggle(Long id) {
-		Fan fan = fanRepository.findById(id).orElseThrow(() -> new FanException("Fan not found: " + id));
-		if(!fan.isOn()) {
-			fan.setSpeed(1);
-		}
+		Fan fan = fanRepository.findById(id).orElseThrow(() -> new FanException("Fan not found: " + id));		
 		fan.toggler();
-		if (!fan.isOn()) {
-			fan.setSpeed(0);
-		}
-		
-		fan = fanRepository.save(fan);	
-		
+		fan = fanRepository.save(fan);			
 		FanDto fanDto = new FanDto(fan.getId(), fan.isOn(), fan.getSpeed());	
 		return fanDto;		
 	}

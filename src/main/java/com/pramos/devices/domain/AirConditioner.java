@@ -30,7 +30,7 @@ public class AirConditioner implements Device, Serializable {
 	private Double thermostatOffMode;
 	
 	public AirConditioner() {
-		super();
+		this.isOn = false;
 		this.thermostat = 24.5;
 		this.thermostatOffMode = 22.0;
 	}
@@ -55,7 +55,7 @@ public class AirConditioner implements Device, Serializable {
 		return thermostatOffMode;
 	}
 
-	public void setThermostatOffMode(Double thermostatOffMode) {
+	public void setThermostatOffMode(Double thermostatOffMode) {		
 		this.thermostatOffMode = thermostatOffMode;
 	}
 
